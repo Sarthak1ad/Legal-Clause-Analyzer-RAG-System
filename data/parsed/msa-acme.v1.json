@@ -1,0 +1,717 @@
+{
+  "doc_id": "msa-acme",
+  "version": 1,
+  "sha256": "6232ea5d92de8e4441efb7c98fe99a5b5bb624b0a7c99f59ad79a5f10ae51e7e",
+  "source_file": "msa_acme.docx",
+  "doc_type": "MSA",
+  "title": "MASTER SERVICES AGREEMENT",
+  "effective_date": "2023-12-01",
+  "parent_ref": null,
+  "num_pages": 1,
+  "full_text": "MASTER SERVICES AGREEMENT\nThis Master Services Agreement is effective as of December 1, 2023 (the \"Effective Date\") between Acme Corp (\"Customer\") and Northwind Software Ltd (\"Supplier\").\n1. Definitions\n\"Fees\" means the annual fees payable by Customer under each Statement of Work.\n\"Confidential Information\" means non-public information disclosed by one party to the other.\n2. Term and Renewal\n2.1 Term. This Agreement begins on the Effective Date and continues for three (3) years unless terminated earlier in accordance with this Agreement.\n2.2 Renewal. This Agreement renews automatically for successive one (1) year periods unless either party gives ninety (90) days written notice of non-renewal.\n3. Fees and Payment\n3.1 Fees. Customer shall pay the Fees within thirty (30) days of receipt of an undisputed invoice.\n3.2 Late Payment. Overdue amounts accrue interest at one percent (1%) per month.\n4. Confidentiality\nEach party shall keep the other party's Confidential Information confidential and shall not disclose it to any third party without prior written consent, except as required by law. This obligation survives for five (5) years after termination.\n5. Intellectual Property\n5.1 Ownership. Customer owns all deliverables created specifically for Customer, subject to Section 12.3.\n5.2 Supplier Materials. Supplier retains ownership of its pre-existing materials and tools.\n9. Indemnification\n9.1 Supplier Indemnity. Supplier shall defend and indemnify Customer against third-party claims arising from:\n(a) infringement of any intellectual property right by the deliverables;\n(b) Supplier's gross negligence or willful misconduct; or\n(c) breach of Section 4 (Confidentiality).\n9.2 Cap on Indemnity. Supplier's total liability under this Section 9 shall not exceed one times (1x) the annual Fees paid in the twelve (12) months preceding the claim.\n10. Limitation of Liability\n10.1 Exclusion. Neither party is liable for indirect or consequential damages.\n10.2 Cap. Each party's aggregate liability shall not exceed the annual Fees, except for liability under Section 9.1(b).\n12. General\n12.1 Notices. Notices must be in writing and delivered to the addresses set out in the applicable Statement of Work.\n12.2 Governing Law. This Agreement is governed by the laws of the State of New York.\n12.3 Order of Precedence. In case of conflict, this Agreement prevails over any Statement of Work.",
+  "sections": [
+    {
+      "label": "1",
+      "path": "1",
+      "kind": "decimal",
+      "level": 1,
+      "title": "Definitions",
+      "span": {
+        "span_id": "msa-acme:v1:p1:1:188-374",
+        "doc_id": "msa-acme",
+        "version": 1,
+        "page": 1,
+        "section_path": "1",
+        "start": 188,
+        "end": 374
+      },
+      "children": []
+    },
+    {
+      "label": "2",
+      "path": "2",
+      "kind": "decimal",
+      "level": 1,
+      "title": "Term and Renewal",
+      "span": {
+        "span_id": "msa-acme:v1:p1:2:375-702",
+        "doc_id": "msa-acme",
+        "version": 1,
+        "page": 1,
+        "section_path": "2",
+        "start": 375,
+        "end": 702
+      },
+      "children": [
+        {
+          "label": "2.1",
+          "path": "2.1",
+          "kind": "decimal",
+          "level": 2,
+          "title": "Term",
+          "span": {
+            "span_id": "msa-acme:v1:p1:2.1:395-543",
+            "doc_id": "msa-acme",
+            "version": 1,
+            "page": 1,
+            "section_path": "2.1",
+            "start": 395,
+            "end": 543
+          },
+          "children": []
+        },
+        {
+          "label": "2.2",
+          "path": "2.2",
+          "kind": "decimal",
+          "level": 2,
+          "title": "Renewal",
+          "span": {
+            "span_id": "msa-acme:v1:p1:2.2:544-702",
+            "doc_id": "msa-acme",
+            "version": 1,
+            "page": 1,
+            "section_path": "2.2",
+            "start": 544,
+            "end": 702
+          },
+          "children": []
+        }
+      ]
+    },
+    {
+      "label": "3",
+      "path": "3",
+      "kind": "decimal",
+      "level": 1,
+      "title": "Fees and Payment",
+      "span": {
+        "span_id": "msa-acme:v1:p1:3:703-902",
+        "doc_id": "msa-acme",
+        "version": 1,
+        "page": 1,
+        "section_path": "3",
+        "start": 703,
+        "end": 902
+      },
+      "children": [
+        {
+          "label": "3.1",
+          "path": "3.1",
+          "kind": "decimal",
+          "level": 2,
+          "title": "Fees",
+          "span": {
+            "span_id": "msa-acme:v1:p1:3.1:723-821",
+            "doc_id": "msa-acme",
+            "version": 1,
+            "page": 1,
+            "section_path": "3.1",
+            "start": 723,
+            "end": 821
+          },
+          "children": []
+        },
+        {
+          "label": "3.2",
+          "path": "3.2",
+          "kind": "decimal",
+          "level": 2,
+          "title": "Late Payment",
+          "span": {
+            "span_id": "msa-acme:v1:p1:3.2:822-902",
+            "doc_id": "msa-acme",
+            "version": 1,
+            "page": 1,
+            "section_path": "3.2",
+            "start": 822,
+            "end": 902
+          },
+          "children": []
+        }
+      ]
+    },
+    {
+      "label": "4",
+      "path": "4",
+      "kind": "decimal",
+      "level": 1,
+      "title": "Confidentiality",
+      "span": {
+        "span_id": "msa-acme:v1:p1:4:903-1165",
+        "doc_id": "msa-acme",
+        "version": 1,
+        "page": 1,
+        "section_path": "4",
+        "start": 903,
+        "end": 1165
+      },
+      "children": []
+    },
+    {
+      "label": "5",
+      "path": "5",
+      "kind": "decimal",
+      "level": 1,
+      "title": "Intellectual Property",
+      "span": {
+        "span_id": "msa-acme:v1:p1:5:1166-1388",
+        "doc_id": "msa-acme",
+        "version": 1,
+        "page": 1,
+        "section_path": "5",
+        "start": 1166,
+        "end": 1388
+      },
+      "children": [
+        {
+          "label": "5.1",
+          "path": "5.1",
+          "kind": "decimal",
+          "level": 2,
+          "title": "Ownership",
+          "span": {
+            "span_id": "msa-acme:v1:p1:5.1:1191-1296",
+            "doc_id": "msa-acme",
+            "version": 1,
+            "page": 1,
+            "section_path": "5.1",
+            "start": 1191,
+            "end": 1296
+          },
+          "children": []
+        },
+        {
+          "label": "5.2",
+          "path": "5.2",
+          "kind": "decimal",
+          "level": 2,
+          "title": "Supplier Materials",
+          "span": {
+            "span_id": "msa-acme:v1:p1:5.2:1297-1388",
+            "doc_id": "msa-acme",
+            "version": 1,
+            "page": 1,
+            "section_path": "5.2",
+            "start": 1297,
+            "end": 1388
+          },
+          "children": []
+        }
+      ]
+    },
+    {
+      "label": "9",
+      "path": "9",
+      "kind": "decimal",
+      "level": 1,
+      "title": "Indemnification",
+      "span": {
+        "span_id": "msa-acme:v1:p1:9:1389-1861",
+        "doc_id": "msa-acme",
+        "version": 1,
+        "page": 1,
+        "section_path": "9",
+        "start": 1389,
+        "end": 1861
+      },
+      "children": [
+        {
+          "label": "9.1",
+          "path": "9.1",
+          "kind": "decimal",
+          "level": 2,
+          "title": "Supplier Indemnity",
+          "span": {
+            "span_id": "msa-acme:v1:p1:9.1:1408-1691",
+            "doc_id": "msa-acme",
+            "version": 1,
+            "page": 1,
+            "section_path": "9.1",
+            "start": 1408,
+            "end": 1691
+          },
+          "children": [
+            {
+              "label": "(a)",
+              "path": "9.1(a)",
+              "kind": "letter",
+              "level": 3,
+              "title": null,
+              "span": {
+                "span_id": "msa-acme:v1:p1:9.1(a):1518-1590",
+                "doc_id": "msa-acme",
+                "version": 1,
+                "page": 1,
+                "section_path": "9.1(a)",
+                "start": 1518,
+                "end": 1590
+              },
+              "children": []
+            },
+            {
+              "label": "(b)",
+              "path": "9.1(b)",
+              "kind": "letter",
+              "level": 3,
+              "title": null,
+              "span": {
+                "span_id": "msa-acme:v1:p1:9.1(b):1591-1648",
+                "doc_id": "msa-acme",
+                "version": 1,
+                "page": 1,
+                "section_path": "9.1(b)",
+                "start": 1591,
+                "end": 1648
+              },
+              "children": []
+            },
+            {
+              "label": "(c)",
+              "path": "9.1(c)",
+              "kind": "letter",
+              "level": 3,
+              "title": null,
+              "span": {
+                "span_id": "msa-acme:v1:p1:9.1(c):1649-1691",
+                "doc_id": "msa-acme",
+                "version": 1,
+                "page": 1,
+                "section_path": "9.1(c)",
+                "start": 1649,
+                "end": 1691
+              },
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "9.2",
+          "path": "9.2",
+          "kind": "decimal",
+          "level": 2,
+          "title": "Cap on Indemnity",
+          "span": {
+            "span_id": "msa-acme:v1:p1:9.2:1692-1861",
+            "doc_id": "msa-acme",
+            "version": 1,
+            "page": 1,
+            "section_path": "9.2",
+            "start": 1692,
+            "end": 1861
+          },
+          "children": []
+        }
+      ]
+    },
+    {
+      "label": "10",
+      "path": "10",
+      "kind": "decimal",
+      "level": 1,
+      "title": "Limitation of Liability",
+      "span": {
+        "span_id": "msa-acme:v1:p1:10:1862-2088",
+        "doc_id": "msa-acme",
+        "version": 1,
+        "page": 1,
+        "section_path": "10",
+        "start": 1862,
+        "end": 2088
+      },
+      "children": [
+        {
+          "label": "10.1",
+          "path": "10.1",
+          "kind": "decimal",
+          "level": 2,
+          "title": "Exclusion",
+          "span": {
+            "span_id": "msa-acme:v1:p1:10.1:1890-1968",
+            "doc_id": "msa-acme",
+            "version": 1,
+            "page": 1,
+            "section_path": "10.1",
+            "start": 1890,
+            "end": 1968
+          },
+          "children": []
+        },
+        {
+          "label": "10.2",
+          "path": "10.2",
+          "kind": "decimal",
+          "level": 2,
+          "title": "Cap",
+          "span": {
+            "span_id": "msa-acme:v1:p1:10.2:1969-2088",
+            "doc_id": "msa-acme",
+            "version": 1,
+            "page": 1,
+            "section_path": "10.2",
+            "start": 1969,
+            "end": 2088
+          },
+          "children": []
+        }
+      ]
+    },
+    {
+      "label": "12",
+      "path": "12",
+      "kind": "decimal",
+      "level": 1,
+      "title": "General",
+      "span": {
+        "span_id": "msa-acme:v1:p1:12:2089-2401",
+        "doc_id": "msa-acme",
+        "version": 1,
+        "page": 1,
+        "section_path": "12",
+        "start": 2089,
+        "end": 2401
+      },
+      "children": [
+        {
+          "label": "12.1",
+          "path": "12.1",
+          "kind": "decimal",
+          "level": 2,
+          "title": "Notices",
+          "span": {
+            "span_id": "msa-acme:v1:p1:12.1:2101-2217",
+            "doc_id": "msa-acme",
+            "version": 1,
+            "page": 1,
+            "section_path": "12.1",
+            "start": 2101,
+            "end": 2217
+          },
+          "children": []
+        },
+        {
+          "label": "12.2",
+          "path": "12.2",
+          "kind": "decimal",
+          "level": 2,
+          "title": "Governing Law",
+          "span": {
+            "span_id": "msa-acme:v1:p1:12.2:2218-2302",
+            "doc_id": "msa-acme",
+            "version": 1,
+            "page": 1,
+            "section_path": "12.2",
+            "start": 2218,
+            "end": 2302
+          },
+          "children": []
+        },
+        {
+          "label": "12.3",
+          "path": "12.3",
+          "kind": "decimal",
+          "level": 2,
+          "title": "Order of Precedence",
+          "span": {
+            "span_id": "msa-acme:v1:p1:12.3:2303-2401",
+            "doc_id": "msa-acme",
+            "version": 1,
+            "page": 1,
+            "section_path": "12.3",
+            "start": 2303,
+            "end": 2401
+          },
+          "children": []
+        }
+      ]
+    }
+  ],
+  "clauses": [
+    {
+      "clause_id": "msa-acme:v1:1",
+      "section_path": "1",
+      "heading": "Definitions",
+      "parent_heading": null,
+      "text": "1. Definitions\n\"Fees\" means the annual fees payable by Customer under each Statement of Work.\n\"Confidential Information\" means non-public information disclosed by one party to the other.",
+      "span": {
+        "span_id": "msa-acme:v1:p1:1:188-374",
+        "doc_id": "msa-acme",
+        "version": 1,
+        "page": 1,
+        "section_path": "1",
+        "start": 188,
+        "end": 374
+      },
+      "sub_spans": []
+    },
+    {
+      "clause_id": "msa-acme:v1:2.1",
+      "section_path": "2.1",
+      "heading": "Term",
+      "parent_heading": "Term and Renewal",
+      "text": "2.1 Term. This Agreement begins on the Effective Date and continues for three (3) years unless terminated earlier in accordance with this Agreement.",
+      "span": {
+        "span_id": "msa-acme:v1:p1:2.1:395-543",
+        "doc_id": "msa-acme",
+        "version": 1,
+        "page": 1,
+        "section_path": "2.1",
+        "start": 395,
+        "end": 543
+      },
+      "sub_spans": []
+    },
+    {
+      "clause_id": "msa-acme:v1:2.2",
+      "section_path": "2.2",
+      "heading": "Renewal",
+      "parent_heading": "Term and Renewal",
+      "text": "2.2 Renewal. This Agreement renews automatically for successive one (1) year periods unless either party gives ninety (90) days written notice of non-renewal.",
+      "span": {
+        "span_id": "msa-acme:v1:p1:2.2:544-702",
+        "doc_id": "msa-acme",
+        "version": 1,
+        "page": 1,
+        "section_path": "2.2",
+        "start": 544,
+        "end": 702
+      },
+      "sub_spans": []
+    },
+    {
+      "clause_id": "msa-acme:v1:3.1",
+      "section_path": "3.1",
+      "heading": "Fees",
+      "parent_heading": "Fees and Payment",
+      "text": "3.1 Fees. Customer shall pay the Fees within thirty (30) days of receipt of an undisputed invoice.",
+      "span": {
+        "span_id": "msa-acme:v1:p1:3.1:723-821",
+        "doc_id": "msa-acme",
+        "version": 1,
+        "page": 1,
+        "section_path": "3.1",
+        "start": 723,
+        "end": 821
+      },
+      "sub_spans": []
+    },
+    {
+      "clause_id": "msa-acme:v1:3.2",
+      "section_path": "3.2",
+      "heading": "Late Payment",
+      "parent_heading": "Fees and Payment",
+      "text": "3.2 Late Payment. Overdue amounts accrue interest at one percent (1%) per month.",
+      "span": {
+        "span_id": "msa-acme:v1:p1:3.2:822-902",
+        "doc_id": "msa-acme",
+        "version": 1,
+        "page": 1,
+        "section_path": "3.2",
+        "start": 822,
+        "end": 902
+      },
+      "sub_spans": []
+    },
+    {
+      "clause_id": "msa-acme:v1:4",
+      "section_path": "4",
+      "heading": "Confidentiality",
+      "parent_heading": null,
+      "text": "4. Confidentiality\nEach party shall keep the other party's Confidential Information confidential and shall not disclose it to any third party without prior written consent, except as required by law. This obligation survives for five (5) years after termination.",
+      "span": {
+        "span_id": "msa-acme:v1:p1:4:903-1165",
+        "doc_id": "msa-acme",
+        "version": 1,
+        "page": 1,
+        "section_path": "4",
+        "start": 903,
+        "end": 1165
+      },
+      "sub_spans": []
+    },
+    {
+      "clause_id": "msa-acme:v1:5.1",
+      "section_path": "5.1",
+      "heading": "Ownership",
+      "parent_heading": "Intellectual Property",
+      "text": "5.1 Ownership. Customer owns all deliverables created specifically for Customer, subject to Section 12.3.",
+      "span": {
+        "span_id": "msa-acme:v1:p1:5.1:1191-1296",
+        "doc_id": "msa-acme",
+        "version": 1,
+        "page": 1,
+        "section_path": "5.1",
+        "start": 1191,
+        "end": 1296
+      },
+      "sub_spans": []
+    },
+    {
+      "clause_id": "msa-acme:v1:5.2",
+      "section_path": "5.2",
+      "heading": "Supplier Materials",
+      "parent_heading": "Intellectual Property",
+      "text": "5.2 Supplier Materials. Supplier retains ownership of its pre-existing materials and tools.",
+      "span": {
+        "span_id": "msa-acme:v1:p1:5.2:1297-1388",
+        "doc_id": "msa-acme",
+        "version": 1,
+        "page": 1,
+        "section_path": "5.2",
+        "start": 1297,
+        "end": 1388
+      },
+      "sub_spans": []
+    },
+    {
+      "clause_id": "msa-acme:v1:9.1",
+      "section_path": "9.1",
+      "heading": "Supplier Indemnity",
+      "parent_heading": "Indemnification",
+      "text": "9.1 Supplier Indemnity. Supplier shall defend and indemnify Customer against third-party claims arising from:\n(a) infringement of any intellectual property right by the deliverables;\n(b) Supplier's gross negligence or willful misconduct; or\n(c) breach of Section 4 (Confidentiality).",
+      "span": {
+        "span_id": "msa-acme:v1:p1:9.1:1408-1691",
+        "doc_id": "msa-acme",
+        "version": 1,
+        "page": 1,
+        "section_path": "9.1",
+        "start": 1408,
+        "end": 1691
+      },
+      "sub_spans": [
+        {
+          "span_id": "msa-acme:v1:p1:9.1(a):1518-1590",
+          "doc_id": "msa-acme",
+          "version": 1,
+          "page": 1,
+          "section_path": "9.1(a)",
+          "start": 1518,
+          "end": 1590
+        },
+        {
+          "span_id": "msa-acme:v1:p1:9.1(b):1591-1648",
+          "doc_id": "msa-acme",
+          "version": 1,
+          "page": 1,
+          "section_path": "9.1(b)",
+          "start": 1591,
+          "end": 1648
+        },
+        {
+          "span_id": "msa-acme:v1:p1:9.1(c):1649-1691",
+          "doc_id": "msa-acme",
+          "version": 1,
+          "page": 1,
+          "section_path": "9.1(c)",
+          "start": 1649,
+          "end": 1691
+        }
+      ]
+    },
+    {
+      "clause_id": "msa-acme:v1:9.2",
+      "section_path": "9.2",
+      "heading": "Cap on Indemnity",
+      "parent_heading": "Indemnification",
+      "text": "9.2 Cap on Indemnity. Supplier's total liability under this Section 9 shall not exceed one times (1x) the annual Fees paid in the twelve (12) months preceding the claim.",
+      "span": {
+        "span_id": "msa-acme:v1:p1:9.2:1692-1861",
+        "doc_id": "msa-acme",
+        "version": 1,
+        "page": 1,
+        "section_path": "9.2",
+        "start": 1692,
+        "end": 1861
+      },
+      "sub_spans": []
+    },
+    {
+      "clause_id": "msa-acme:v1:10.1",
+      "section_path": "10.1",
+      "heading": "Exclusion",
+      "parent_heading": "Limitation of Liability",
+      "text": "10.1 Exclusion. Neither party is liable for indirect or consequential damages.",
+      "span": {
+        "span_id": "msa-acme:v1:p1:10.1:1890-1968",
+        "doc_id": "msa-acme",
+        "version": 1,
+        "page": 1,
+        "section_path": "10.1",
+        "start": 1890,
+        "end": 1968
+      },
+      "sub_spans": []
+    },
+    {
+      "clause_id": "msa-acme:v1:10.2",
+      "section_path": "10.2",
+      "heading": "Cap",
+      "parent_heading": "Limitation of Liability",
+      "text": "10.2 Cap. Each party's aggregate liability shall not exceed the annual Fees, except for liability under Section 9.1(b).",
+      "span": {
+        "span_id": "msa-acme:v1:p1:10.2:1969-2088",
+        "doc_id": "msa-acme",
+        "version": 1,
+        "page": 1,
+        "section_path": "10.2",
+        "start": 1969,
+        "end": 2088
+      },
+      "sub_spans": []
+    },
+    {
+      "clause_id": "msa-acme:v1:12.1",
+      "section_path": "12.1",
+      "heading": "Notices",
+      "parent_heading": "General",
+      "text": "12.1 Notices. Notices must be in writing and delivered to the addresses set out in the applicable Statement of Work.",
+      "span": {
+        "span_id": "msa-acme:v1:p1:12.1:2101-2217",
+        "doc_id": "msa-acme",
+        "version": 1,
+        "page": 1,
+        "section_path": "12.1",
+        "start": 2101,
+        "end": 2217
+      },
+      "sub_spans": []
+    },
+    {
+      "clause_id": "msa-acme:v1:12.2",
+      "section_path": "12.2",
+      "heading": "Governing Law",
+      "parent_heading": "General",
+      "text": "12.2 Governing Law. This Agreement is governed by the laws of the State of New York.",
+      "span": {
+        "span_id": "msa-acme:v1:p1:12.2:2218-2302",
+        "doc_id": "msa-acme",
+        "version": 1,
+        "page": 1,
+        "section_path": "12.2",
+        "start": 2218,
+        "end": 2302
+      },
+      "sub_spans": []
+    },
+    {
+      "clause_id": "msa-acme:v1:12.3",
+      "section_path": "12.3",
+      "heading": "Order of Precedence",
+      "parent_heading": "General",
+      "text": "12.3 Order of Precedence. In case of conflict, this Agreement prevails over any Statement of Work.",
+      "span": {
+        "span_id": "msa-acme:v1:p1:12.3:2303-2401",
+        "doc_id": "msa-acme",
+        "version": 1,
+        "page": 1,
+        "section_path": "12.3",
+        "start": 2303,
+        "end": 2401
+      },
+      "sub_spans": []
+    }
+  ],
+  "warnings": [
+    "DOCX has no fixed pages; all blocks assigned to page 1"
+  ]
+}
