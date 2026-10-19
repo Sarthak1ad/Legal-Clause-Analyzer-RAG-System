@@ -1,0 +1,24 @@
+template_id: "TPL-GOV-v1"
+clause_type: "governing_law"
+version: "1"
+status: "approved"
+effective_from: "2024-01-01"
+standard_text: >
+  This Agreement shall be governed by and construed in accordance with the laws
+  of the State of New York, without regard to its conflict of law principles.
+attributes:
+  - name: governing_law
+    value_kind: enum
+    preferred: "New York"
+    acceptable:
+      - "New York"
+      - "Delaware"
+      - "California"
+      - "England"
+    fallback: null
+    better_when: "equals"
+    favours_role: "neutral"
+    note: >
+      New York is strongly preferred for predictability. Delaware, California and
+      England are acceptable. Any other jurisdiction triggers review—customer may
+      be less familiar with that law and its courts.

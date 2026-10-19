@@ -2,3 +2,5 @@ pydantic>=2
 python-docx
 pymupdf
 pytest
+rapidfuzz
+pyyaml

@@ -5,5 +5,26 @@
       "sha256": "6232ea5d92de8e4441efb7c98fe99a5b5bb624b0a7c99f59ad79a5f10ae51e7e",
       "ingested_at": "2026-10-17T03:17:52.942112+00:00"
     }
+  ],
+  "sow-acme-01": [
+    {
+      "version": 1,
+      "sha256": "b8f7d4d3ae245442296b63958953d1448e0269a2c1fbccaa5203cb40ccb03b0c",
+      "ingested_at": "2026-10-19T05:27:31.341701+00:00"
+    }
+  ],
+  "nda-globex": [
+    {
+      "version": 1,
+      "sha256": "b8e161313569e9b98f78f508f08b28daa5d9d352ca2f6172d9871c67d0fc54a5",
+      "ingested_at": "2026-10-19T05:27:32.025003+00:00"
+    }
+  ],
+  "msa-initech": [
+    {
+      "version": 1,
+      "sha256": "0b2f4c8d2be147b6bc2ded4937458f332c8e00ffab78fac59696f3abbd78c67f",
+      "ingested_at": "2026-10-19T05:27:32.658646+00:00"
+    }
   ]
 }

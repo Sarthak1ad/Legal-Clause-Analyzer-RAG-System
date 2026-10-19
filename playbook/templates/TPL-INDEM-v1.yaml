@@ -1,0 +1,45 @@
+template_id: "TPL-INDEM-v1"
+clause_type: "indemnification"
+version: "1"
+status: "approved"
+effective_from: "2024-01-01"
+standard_text: >
+  Supplier shall defend, indemnify and hold harmless Customer against all third-party
+  claims arising from Supplier's breach, gross negligence or wilful misconduct.
+  Supplier's total liability under this indemnification shall not exceed two times (2x)
+  the annual Fees paid in the twelve months preceding the claim.
+attributes:
+  - name: cap_multiple
+    value_kind: number
+    preferred: 2.0
+    acceptable: 1.5
+    fallback: 1.0
+    better_when: "higher"
+    favours_role: "customer"
+    note: "Higher cap is better for customer: more compensation available."
+
+  - name: covers_gross_negligence
+    value_kind: bool
+    preferred: true
+    acceptable: true
+    fallback: false
+    better_when: "true"
+    favours_role: "customer"
+    note: "Customer wants gross negligence covered so supplier cannot escape liability."
+
+  - name: direction
+    value_kind: enum
+    preferred: "one_way"
+    acceptable: "one_way"
+    fallback: "mutual"
+    better_when: "equals"
+    favours_role: "customer"
+    note: "One-way (supplier indemnifies customer) is preferred; mutual dilutes the protection."
+
+  - name: indemnitor
+    value_kind: text
+    preferred: "Supplier"
+    acceptable: "Supplier"
+    fallback: null
+    better_when: "equals"
+    favours_role: "customer"

@@ -1,0 +1,37 @@
+template_id: "TPL-TERM-v1"
+clause_type: "term_renewal"
+version: "1"
+status: "approved"
+effective_from: "2024-01-01"
+standard_text: >
+  This Agreement begins on the Effective Date and continues for three (3) years unless
+  terminated earlier. It renews automatically for successive one (1) year periods unless
+  either party gives sixty (60) days written notice of non-renewal prior to the
+  end of the then-current term.
+attributes:
+  - name: term_years
+    value_kind: number
+    preferred: 3
+    acceptable: 3
+    fallback: 5
+    better_when: "lower"
+    favours_role: "customer"
+    note: "Shorter initial term gives customer earlier exit points."
+
+  - name: non_renewal_notice_days
+    value_kind: number
+    preferred: 60
+    acceptable: 90
+    fallback: 120
+    better_when: "lower"
+    favours_role: "customer"
+    note: "Shorter notice window is better for customer—more flexibility to exit."
+
+  - name: auto_renew
+    value_kind: bool
+    preferred: false
+    acceptable: true
+    fallback: true
+    better_when: "false"
+    favours_role: "customer"
+    note: "Auto-renew is acceptable but means customer must remember to send notice."

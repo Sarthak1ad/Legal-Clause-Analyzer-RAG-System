@@ -1,0 +1,19 @@
+template_id: "TPL-OOP-v1"
+clause_type: "order_of_precedence"
+version: "1"
+status: "approved"
+effective_from: "2024-01-01"
+standard_text: >
+  In the event of any conflict between this Agreement and any Statement of Work
+  or other document, this Agreement shall prevail.
+attributes:
+  - name: prevailing_document
+    value_kind: text
+    preferred: "agreement"
+    acceptable: "agreement"
+    fallback: null
+    better_when: "equals"
+    favours_role: "customer"
+    note: >
+      The master agreement prevailing over SOWs is preferred—customer's legal
+      team negotiated the MSA terms and wants them to control.

@@ -1,0 +1,26 @@
+template_id: "TPL-PAY-v1"
+clause_type: "payment"
+version: "1"
+status: "approved"
+effective_from: "2024-01-01"
+standard_text: >
+  Customer shall pay undisputed invoices within forty-five (45) days of receipt.
+  Overdue amounts accrue interest at no more than one percent (1.0%) per month.
+attributes:
+  - name: payment_days
+    value_kind: number
+    preferred: 45
+    acceptable: 30
+    fallback: 15
+    better_when: "higher"
+    favours_role: "customer"
+    note: "Longer payment window is better for customer cash-flow."
+
+  - name: late_interest_pct_per_month
+    value_kind: number
+    preferred: 1.0
+    acceptable: 1.5
+    fallback: 2.0
+    better_when: "lower"
+    favours_role: "customer"
+    note: "Lower late-interest rate reduces penalty exposure for customer."

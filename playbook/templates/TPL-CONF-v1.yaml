@@ -1,0 +1,28 @@
+template_id: "TPL-CONF-v1"
+clause_type: "confidentiality"
+version: "1"
+status: "approved"
+effective_from: "2024-01-01"
+standard_text: >
+  Each party shall keep the other party's Confidential Information strictly confidential
+  and shall not disclose it to any third party without prior written consent, except as
+  required by law. This obligation survives for five (5) years after termination
+  or expiry of this Agreement.
+attributes:
+  - name: survival_years
+    value_kind: number
+    preferred: 5
+    acceptable: 3
+    fallback: 2
+    better_when: "higher"
+    favours_role: "customer"
+    note: "Longer survival protects customer's data longer after contract ends."
+
+  - name: mutual
+    value_kind: bool
+    preferred: true
+    acceptable: true
+    fallback: false
+    better_when: "true"
+    favours_role: "customer"
+    note: "Mutual obligation protects both parties' confidential information."

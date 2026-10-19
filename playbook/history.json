@@ -1,0 +1,92 @@
+[
+  {
+    "deal_id": "DEAL-2021-001",
+    "counterparty": "Apex Systems Inc",
+    "clause_type": "indemnification",
+    "attribute": "cap_multiple",
+    "our_ask": 2.0,
+    "final_value": 2.0,
+    "outcome": "accepted"
+  },
+  {
+    "deal_id": "DEAL-2021-002",
+    "counterparty": "BlueStar Technologies",
+    "clause_type": "indemnification",
+    "attribute": "cap_multiple",
+    "our_ask": 2.0,
+    "final_value": 1.5,
+    "outcome": "conceded"
+  },
+  {
+    "deal_id": "DEAL-2022-001",
+    "counterparty": "CoreLogic Solutions",
+    "clause_type": "indemnification",
+    "attribute": "cap_multiple",
+    "our_ask": 2.0,
+    "final_value": 2.0,
+    "outcome": "accepted"
+  },
+  {
+    "deal_id": "DEAL-2022-002",
+    "counterparty": "DataBridge Corp",
+    "clause_type": "payment",
+    "attribute": "payment_days",
+    "our_ask": 45,
+    "final_value": 45,
+    "outcome": "accepted"
+  },
+  {
+    "deal_id": "DEAL-2022-003",
+    "counterparty": "EclipseWare Ltd",
+    "clause_type": "payment",
+    "attribute": "payment_days",
+    "our_ask": 45,
+    "final_value": 30,
+    "outcome": "conceded"
+  },
+  {
+    "deal_id": "DEAL-2023-001",
+    "counterparty": "Frontier Analytics",
+    "clause_type": "confidentiality",
+    "attribute": "survival_years",
+    "our_ask": 5,
+    "final_value": 5,
+    "outcome": "accepted"
+  },
+  {
+    "deal_id": "DEAL-2023-002",
+    "counterparty": "Gridlock Software",
+    "clause_type": "confidentiality",
+    "attribute": "survival_years",
+    "our_ask": 5,
+    "final_value": 3,
+    "outcome": "conceded"
+  },
+  {
+    "deal_id": "DEAL-2023-003",
+    "counterparty": "HorizonNet Inc",
+    "clause_type": "governing_law",
+    "attribute": "governing_law",
+    "our_ask": "New York",
+    "final_value": "Delaware",
+    "outcome": "conceded"
+  },
+  {
+    "deal_id": "DEAL-2024-001",
+    "counterparty": "Innodata Global",
+    "clause_type": "indemnification",
+    "attribute": "cap_multiple",
+    "our_ask": 2.0,
+    "final_value": 2.0,
+    "outcome": "accepted"
+  },
+  {
+    "deal_id": "DEAL-2024-002",
+    "counterparty": "JetStream Systems",
+    "clause_type": "term_renewal",
+    "attribute": "non_renewal_notice_days",
+    "our_ask": 60,
+    "final_value": 90,
+    "outcome": "rejected"
+  }
+]

@@ -1,0 +1,37 @@
+template_id: "TPL-LOL-v1"
+clause_type: "limitation_of_liability"
+version: "1"
+status: "approved"
+effective_from: "2024-01-01"
+standard_text: >
+  Neither party shall be liable for indirect, consequential, special or punitive damages.
+  Each party's aggregate liability shall not exceed the annual Fees paid or payable
+  in the twelve months preceding the claim, except for liability arising under
+  the indemnification section.
+attributes:
+  - name: cap_multiple
+    value_kind: number
+    preferred: 1.0
+    acceptable: 1.5
+    fallback: 2.0
+    better_when: "lower"
+    favours_role: "customer"
+    note: "Lower cap limits exposure; customer prefers 1x. Higher values favour supplier."
+
+  - name: excludes_indirect_damages
+    value_kind: bool
+    preferred: true
+    acceptable: true
+    fallback: false
+    better_when: "true"
+    favours_role: "neutral"
+    note: "Both sides benefit from excluding consequential damages."
+
+  - name: mutual
+    value_kind: bool
+    preferred: true
+    acceptable: true
+    fallback: false
+    better_when: "true"
+    favours_role: "customer"
+    note: "Mutual cap means supplier is also capped—better balance for customer."

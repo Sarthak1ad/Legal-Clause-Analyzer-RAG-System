@@ -1,0 +1,4 @@
+our_organization: "Our Company Ltd"
+our_role: "customer"
+default_perspective: "customer"
+playbook_version: "1.0.0"
