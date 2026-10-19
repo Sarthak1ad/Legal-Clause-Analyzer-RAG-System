@@ -33,5 +33,149 @@
       "sha256": "676386c2ec69e496024e2ad5d9639354fdfe19df8f1a964b0a4f4a223e4824ec",
       "ingested_at": "2026-10-19T05:41:51.293517+00:00"
     }
+  ],
+  "msa-hooli-acme": [
+    {
+      "version": 1,
+      "sha256": "6a7ef76201d393027e8ed9e4b18840830c46c20b86c4acedacfe4fa1f0aa9810",
+      "ingested_at": "2026-10-19T07:17:39.595865+00:00"
+    },
+    {
+      "version": 2,
+      "sha256": "d190365b63d5e54eb4958083c017f97127d89e125fb33a4d7f158d910a099d7d",
+      "ingested_at": "2026-10-19T07:51:01.414953+00:00"
+    }
+  ],
+  "msa-hooli-acme-eu": [
+    {
+      "version": 1,
+      "sha256": "3034390407d126164c3880e521b75880a1bc2d34336392962015475da20a75a6",
+      "ingested_at": "2026-10-19T07:17:39.689627+00:00"
+    },
+    {
+      "version": 2,
+      "sha256": "60922829cd4369c2f2768b1c72017ae281e9ef9d9c92935659a3b9601768e6d9",
+      "ingested_at": "2026-10-19T07:51:01.521600+00:00"
+    }
+  ],
+  "msa-stark-acme": [
+    {
+      "version": 1,
+      "sha256": "ecea38907133cdd82086337cdbe6e9af7267c8982e44e170848e81fee6263472",
+      "ingested_at": "2026-10-19T07:17:39.805044+00:00"
+    },
+    {
+      "version": 2,
+      "sha256": "f38e7ac0055b9692518590133715a570b82893c9593b53a1a75a73f0b0522939",
+      "ingested_at": "2026-10-19T07:51:01.653192+00:00"
+    }
+  ],
+  "msa-stark-acme-eu": [
+    {
+      "version": 1,
+      "sha256": "06bff403b80695643842fb1d9817b92571a6f431a667c05b9a4129c5f10d8d9a",
+      "ingested_at": "2026-10-19T07:17:39.940472+00:00"
+    },
+    {
+      "version": 2,
+      "sha256": "fb2c12fa437eb2720deceea8e78cb54db8f94f0ce9e995ecfa6a8b0e0d4b09f5",
+      "ingested_at": "2026-10-19T07:51:01.816265+00:00"
+    }
+  ],
+  "msa-umbrella-acme": [
+    {
+      "version": 1,
+      "sha256": "6ee7a1fc6068ae07e9d6aab976bdc824dbe115c42a746d603ae454e0cffbe504",
+      "ingested_at": "2026-10-19T07:17:40.050422+00:00"
+    },
+    {
+      "version": 2,
+      "sha256": "6c21ef2262be5765d8c5c419d037a7bd443d8ef20a22cc6dcabd1230d5f6d29e",
+      "ingested_at": "2026-10-19T07:51:01.950478+00:00"
+    }
+  ],
+  "msa-umbrella-acme-eu": [
+    {
+      "version": 1,
+      "sha256": "d4577200828d39a114382964e68504d1e51fc701620ddb01e1a71178dcd17c6c",
+      "ingested_at": "2026-10-19T07:17:40.168738+00:00"
+    },
+    {
+      "version": 2,
+      "sha256": "17df3bf5c769b443e6ba5170f3c295855b00c0a209d134fe4112fc1192e6374f",
+      "ingested_at": "2026-10-19T07:51:02.087346+00:00"
+    }
+  ],
+  "msa-wayne-acme": [
+    {
+      "version": 1,
+      "sha256": "58d4b470aeb2159bec863f85647b675545afb6f215d04f64ec70ce6b93907f15",
+      "ingested_at": "2026-10-19T07:17:40.280812+00:00"
+    },
+    {
+      "version": 2,
+      "sha256": "bd71be637e868d30ff34091a53bd166c3d739dfab656eb85999674f786c0d873",
+      "ingested_at": "2026-10-19T07:51:02.218683+00:00"
+    }
+  ],
+  "msa-wayne-acme-eu": [
+    {
+      "version": 1,
+      "sha256": "3c4a042b4949c717198d9dcf8c4a1f53feaa596aae9a2fe0bc6992d629a7b45d",
+      "ingested_at": "2026-10-19T07:17:40.398537+00:00"
+    },
+    {
+      "version": 2,
+      "sha256": "1d343e4adc0e0c0dac192074fc22f38844d88aaab4de5d7c7e577f63d208f100",
+      "ingested_at": "2026-10-19T07:51:02.348826+00:00"
+    }
+  ],
+  "msa-wonka-acme": [
+    {
+      "version": 1,
+      "sha256": "a71b0d00d3808125e2f81086a873c750948eddfaf92af3b7bdf1ba57603a9817",
+      "ingested_at": "2026-10-19T07:17:40.503379+00:00"
+    },
+    {
+      "version": 2,
+      "sha256": "071c6940d7dfddc72bc5ba07dbb7c624c1286bc3658aa1db34bc6ace1fe41709",
+      "ingested_at": "2026-10-19T07:51:02.489166+00:00"
+    }
+  ],
+  "nda-stark-acme": [
+    {
+      "version": 1,
+      "sha256": "b1ca806ed8d28b3de4938150c6e4bc5fe873577ca63aa878c4dbf38eb7f88a43",
+      "ingested_at": "2026-10-19T07:17:40.612157+00:00"
+    },
+    {
+      "version": 2,
+      "sha256": "b00ff4d7a43cb5dbc7a7b64a638c623580e8b1a9b15424a54ac61594e0d0e686",
+      "ingested_at": "2026-10-19T07:51:02.627700+00:00"
+    }
+  ],
+  "sow-hooli-acme-01": [
+    {
+      "version": 1,
+      "sha256": "6876e935a53529d029b4e7bbf9ab0b51e8d5d6e6e44b32d5fadd4eb3fee92e27",
+      "ingested_at": "2026-10-19T07:17:40.726388+00:00"
+    },
+    {
+      "version": 2,
+      "sha256": "877e4e082fb67a6a7b824f63a7828a49331ff32cd6ec7e1463c2e4ee8c894d11",
+      "ingested_at": "2026-10-19T07:51:02.757197+00:00"
+    }
+  ],
+  "sow-wonka-acme-01": [
+    {
+      "version": 1,
+      "sha256": "19239df107dc8dfa8d3f6c5e35e7101c3baf09121b0628d6c529a897eed2a1e2",
+      "ingested_at": "2026-10-19T07:17:40.835350+00:00"
+    },
+    {
+      "version": 2,
+      "sha256": "8d035955fbf762e78de8c4a27285979d417c403fa119c88bb8e4d9d3c3570d1d",
+      "ingested_at": "2026-10-19T07:51:02.898258+00:00"
+    }
   ]
 }

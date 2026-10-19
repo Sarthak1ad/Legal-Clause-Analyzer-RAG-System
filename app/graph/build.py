@@ -185,6 +185,20 @@ def build_graph(
             needs_rev = ext_c.needs_review if ext_c else False
             attr_dict = {a.name: a.value for a in ext_c.attributes} if ext_c else {}
 
+            # Detect amendment operation clauses ("Section X is deleted and replaced...")
+            # These must not match standard templates and must get clause_type="other"
+            if p_doc.doc_type == "AMENDMENT":
+                m_op = re.search(
+                    r'Section\s+([\d.]+)\s+is\s+(?:deleted\s+and\s+replaced\s+with|amended\s+to\s+read)',
+                    p_clause.text,
+                    re.IGNORECASE,
+                )
+                if m_op or (ext_c and re.search(r"\b(?:deleted\s+and\s+replaced|amended\s+to\s+read)\b", p_clause.text, re.IGNORECASE)):
+                    c_type = "other"
+                    target_sec = m_op.group(1).strip() if m_op else ""
+                    attr_dict = {"operation": "replace", "target_section": target_sec}
+                    tpl_match = None
+
             cid = f"{doc_id}:{path}"
             cl_node = ClauseNode(
                 id=cid,
@@ -197,6 +211,8 @@ def build_graph(
                 attributes=attr_dict,
                 needs_review=needs_rev,
                 status="active",
+                effective_from=eff_date_str,
+                effective_to=None,
             )
             clauses_by_doc[doc_id][path] = cl_node
             clause_objects_by_doc[doc_id].append(cl_node)
@@ -454,19 +470,49 @@ def build_graph(
                         evidence_span_ids=[repl_node.span_id],
                     )
 
+                    # Inherit INSTANCE_OF edge from the original clause to the same template
+                    # so the replacement is linked to the same StandardTemplate node.
+                    for eid, e in list(edges.items()):
+                        if e.type == "INSTANCE_OF" and e.source == orig_cid:
+                            new_inst_id = f"{repl_node.id}->INSTANCE_OF->{e.target}"
+                            if new_inst_id not in edges:
+                                edges[new_inst_id] = Edge(
+                                    id=new_inst_id,
+                                    type="INSTANCE_OF",
+                                    source=repl_node.id,
+                                    target=e.target,
+                                    provenance="inherited_from_superseded",
+                                    properties={**e.properties, "inherited": True},
+                                )
+
     # ------------------------------------------------------------------
     # 6. Reference Resolution (Internal References)
     # ------------------------------------------------------------------
     for doc_id, ext_doc in extracted_docs.items():
+        p_doc = parsed_docs.get(doc_id)
         doc_clauses = clauses_by_doc.get(doc_id, {})
         for ext_c in ext_doc.clauses:
             source_cid = f"{doc_id}:{ext_c.section_path}"
             for ref in ext_c.references:
                 target_raw = ref.target.strip()
-                # Check for self-reference
-                if target_raw == ext_c.section_path or target_raw.startswith(f"{ext_c.section_path}("):
-                    # Ignore self-references
-                    continue
+
+                # Rule 1: Exact self-reference ("this Section 9.2" inside 9.2)
+                if target_raw == ext_c.section_path or target_raw.startswith(
+                    f"{ext_c.section_path}("
+                ):
+                    continue  # silently ignore
+
+                # Rule 2: Ancestor / self-scope reference (e.g. "this Section 9" written
+                # inside clause 9.2).  The referring clause IS a descendant of the target,
+                # so the target is an ancestor path: ignore it with no review item.
+                if ext_c.section_path.startswith(f"{target_raw}."):
+                    continue  # self-scope reference – silently ignore
+
+                # Rule 3: Amendment operation clauses reference the parent-contract
+                # sections they supersede.  Those relationships are already captured
+                # by SUPERSEDES edges, so we do not add a REFERENCES edge or a review item.
+                if p_doc and p_doc.doc_type == "AMENDMENT":
+                    continue  # all cross-doc references in amendments are modelled by SUPERSEDES
 
                 target_clause = _resolve_reference_target(target_raw, doc_clauses)
                 if target_clause:
@@ -481,16 +527,26 @@ def build_graph(
                         evidence_span_ids=[ref.evidence.span.span_id],
                     )
                 else:
+                    # Rule 4: Schedule/exhibit references (e.g. "Schedule A") that have
+                    # no clause node are low-severity – they are expected gaps.
+                    is_schedule = (
+                        ref.kind == "schedule"
+                        or re.match(r'^[A-Z]$', target_raw)
+                        or target_raw.lower().startswith("schedule")
+                        or target_raw.lower().startswith("exhibit")
+                    )
+                    severity = "info" if is_schedule else "warning"
                     review_items.append(
                         ReviewItem(
                             item_id=f"rev:ref_unres:{source_cid}:{target_raw}",
                             doc_id=doc_id,
                             kind="unresolvable_reference",
                             description=(
-                                f"Clause {ext_c.section_path} in {doc_id} references {target_raw!r} "
-                                f"which cannot be resolved to any clause."
+                                f"Clause {ext_c.section_path} in {doc_id} references "
+                                f"{target_raw!r} which cannot be resolved to any clause."
                             ),
                             span_id=ref.evidence.span.span_id,
+                            severity=severity,
                         )
                     )
 
@@ -564,13 +620,14 @@ def build_graph(
                     gov_law_val = str(v)
                     gov_law_span = cnode.span_id
 
-        # Derived dates
+        # Derived dates; amendments only get an effective DateEvent (doc_type guards this)
         date_events = derive_dates_for_contract(
             doc_id=doc_id,
             effective_date_str=p_doc.effective_date.isoformat() if p_doc.effective_date else None,
             attributes=eff_attrs,
             attribute_spans=attr_spans,
             as_of=as_of_str,
+            doc_type=p_doc.doc_type,
         )
 
         for dev in date_events:

@@ -38,6 +38,8 @@ class ClauseNode(BaseModel):
     attributes: dict[str, Any] = Field(default_factory=dict)
     needs_review: bool = False
     status: Literal["active", "superseded"] = "active"
+    effective_from: Optional[str] = None
+    effective_to: Optional[str] = None
 
 
 class PartyNode(BaseModel):
@@ -112,6 +114,7 @@ class ReviewItem(BaseModel):
     kind: str  # unresolvable_reference, unlinked_parent, ambiguous_parent, ambiguous_amendment, etc.
     description: str
     span_id: Optional[str] = None
+    severity: Literal["info", "warning", "error"] = "warning"
 
 
 class EffectiveClauseEntry(BaseModel):

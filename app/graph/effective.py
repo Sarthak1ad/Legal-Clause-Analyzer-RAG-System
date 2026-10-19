@@ -281,20 +281,23 @@ def resolve_effective_clauses(
                 )
             else:
                 chosen_op = latest_ops[0]
-                # Convert extracted clause to ClauseNode
+                # Convert extracted clause to ClauseNode, inheriting clause_type from superseded clause
                 attr_dict = {a.name: a.value for a in chosen_op.extracted_clause.attributes}
                 new_clause_node = ClauseNode(
                     id=f"{chosen_op.source_doc_id}:{path}",
                     clause_id=f"{chosen_op.source_doc_id}:{path}",
                     section_path=path,
                     heading=chosen_op.heading or orig_clause.heading,
-                    clause_type=chosen_op.extracted_clause.clause_type.value,
+                    clause_type=orig_clause.clause_type,
                     span_id=chosen_op.span_id,
                     text_hash=compute_text_hash(chosen_op.replacement_text),
                     attributes=attr_dict,
                     needs_review=chosen_op.extracted_clause.needs_review,
                     status="active",
+                    effective_from=chosen_op.effective_date.isoformat(),
+                    effective_to=None,
                 )
+                orig_clause.effective_to = chosen_op.effective_date.isoformat()
                 effective_clauses[path] = new_clause_node
                 effective_entries.append(
                     EffectiveClauseEntry(

@@ -1,14 +1,22 @@
-"""CLI runner for Layer 4 Knowledge Graph (app/graph/run.py).
+"""CLI runner for Layer 4/5b Knowledge Graph (app/graph/run.py).
 
 Usage:
   python -m app.graph.run --data-dir data --as-of 2026-10-19
-  python -m app.graph.run --data-dir data --as-of 2026-10-19 --neo4j --rebuild
+  python -m app.graph.run --data-dir data --neo4j --namespace main --rebuild
+  python -m app.graph.run --data-dir data --neo4j --reset
 """
 from __future__ import annotations
 
 import argparse
 import sys
 from pathlib import Path
+
+# Load .env if present
+try:
+    from dotenv import load_dotenv  # type: ignore
+    load_dotenv()
+except ImportError:
+    pass
 
 from .build import build_graph
 from .neo4j_store import Neo4jStore, is_neo4j_available
@@ -20,12 +28,20 @@ def main():
     )
     parser.add_argument("--data-dir", default="data", help="Path to data directory (default: data)")
     parser.add_argument(
-        "--as-of", default="2026-10-19", help="Evaluation date for effective state and renewals (YYYY-MM-DD)"
+        "--as-of", default="2026-10-19", help="Evaluation date for effective state (YYYY-MM-DD)"
     )
     parser.add_argument("--neo4j", action="store_true", help="Load graph into Neo4j database")
-    parser.add_argument("--reset", action="store_true", help="Clear Neo4j database before loading")
     parser.add_argument(
-        "--rebuild", action="store_true", help="Reset Neo4j and perform full build + load"
+        "--namespace", default="main",
+        help="Neo4j namespace (default: main). Use a different name for tests."
+    )
+    parser.add_argument(
+        "--reset", action="store_true",
+        help="Delete only nodes in this namespace before loading"
+    )
+    parser.add_argument(
+        "--rebuild", action="store_true",
+        help="Reset namespace and perform full reload (same as --reset + --neo4j)"
     )
     args = parser.parse_args()
 
@@ -96,35 +112,54 @@ def main():
     else:
         print("  (no superseded clauses as of this date)")
 
-    # 5. Print Review Items
-    print(f"\nREVIEW ITEMS ({len(graph.review_items)})")
-    if graph.review_items:
-        for r in graph.review_items:
+    # 5. Print Review Items grouped by severity
+    errors   = [r for r in graph.review_items if r.severity == "error"]
+    warnings = [r for r in graph.review_items if r.severity == "warning"]
+    infos    = [r for r in graph.review_items if r.severity == "info"]
+
+    print(f"\nREVIEW ITEMS ({len(graph.review_items)})  "
+          f"[errors={len(errors)}, warnings={len(warnings)}, info={len(infos)}]")
+
+    for group_label, group in [("ERROR", errors), ("WARNING", warnings), ("INFO", infos)]:
+        if not group:
+            continue
+        print(f"\n  [{group_label}]")
+        for r in group:
             span_str = f" [span: {r.span_id}]" if r.span_id else ""
-            print(f"  ! [{r.kind}] ({r.doc_id}){span_str}: {r.description}")
-    else:
+            print(f"    ! [{r.kind}] ({r.doc_id}){span_str}: {r.description}")
+
+    if not graph.review_items:
         print("  (no review items generated)")
 
     print(f"\nSaved graph export -> {data_dir}/graph/graph.json")
     print(f"Saved effective views -> {data_dir}/graph/effective/")
 
     # 6. Optional Neo4j Loading
-    if args.neo4j or args.rebuild:
+    load_neo4j = args.neo4j or args.rebuild
+    if load_neo4j:
         print("\nNEO4J DATABASE LOADING")
         if not is_neo4j_available():
             print("  WARNING: Neo4j server is not reachable. Skipping Neo4j load.")
             print("  Check that Neo4j is running (e.g. docker-compose up -d).")
+            print("  Or run:  python -m app.graph.neo4j_check")
         else:
-            store = Neo4jStore()
-            try:
-                if args.reset or args.rebuild:
-                    print("  Resetting Neo4j database...")
-                    store.reset_database()
-                print("  Loading nodes and edges in UNWIND batches...")
-                store.load_graph(graph)
-                print("  Loaded successfully into Neo4j!")
-            finally:
-                store.close()
+            ns = args.namespace
+            do_reset = args.reset or args.rebuild
+            print(f"  Namespace : {ns}")
+            print(f"  Reset     : {do_reset}")
+
+            with Neo4jStore(namespace=ns) as store:
+                try:
+                    stats = store.load_graph(graph, reset=do_reset)
+                    print("\n  NEO4J NODE COUNTS (verified):")
+                    for label, cnt in sorted(stats["node_counts"].items()):
+                        print(f"    {label:<20} : {cnt}")
+                    print("\n  NEO4J EDGE COUNTS (verified):")
+                    for rel_type, cnt in sorted(stats["edge_counts"].items()):
+                        print(f"    {rel_type:<20} : {cnt}")
+                except ValueError as exc:
+                    print(f"\n  [FAIL] {exc}", file=sys.stderr)
+                    sys.exit(1)
 
     print()
 

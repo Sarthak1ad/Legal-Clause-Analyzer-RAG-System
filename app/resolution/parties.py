@@ -59,7 +59,7 @@ _QUOTES = '"\'' + "\u201c\u201d\u2018\u2019"  # ASCII + Unicode curly quotes
 # e.g. 'Acme Corp ("Customer")' or 'Acme Corp (\u201cCustomer\u201d)'
 # Group 1 = company name; Group 2 = role label
 _WITH_ROLE = re.compile(
-    r'([A-Z][A-Za-z&\-.]*(?:\s+[A-Za-z&\-.]+){0,5})'
+    r'([A-Z][A-Za-z&\-.,]*(?:\s+[A-Za-z&\-.,]+){0,5})'
     r'\s*\([' + _QUOTES + r']'
     r'([A-Za-z][A-Za-z ]{1,30})'
     r'[' + _QUOTES + r']\)'

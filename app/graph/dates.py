@@ -48,6 +48,7 @@ def derive_dates_for_contract(
     attributes: dict[str, Any],
     attribute_spans: Optional[dict[str, str]] = None,
     as_of: Union[str, date] = "2026-10-19",
+    doc_type: Optional[str] = None,
 ) -> list[DateEventNode]:
     """Derive all date events for a contract based on effective attributes.
 
@@ -57,6 +58,7 @@ def derive_dates_for_contract(
         attributes: dictionary of flattened attributes from effective clauses
         attribute_spans: map of attribute_name -> span_id providing evidence
         as_of: evaluation date for renewal status
+        doc_type: document type (e.g. 'AMENDMENT', 'MSA', 'SOW')
 
     Returns:
         list of DateEventNode objects
@@ -78,6 +80,10 @@ def derive_dates_for_contract(
                 passed=(eff_date <= as_of_date),
             )
         )
+
+    # Amendments only get an effective DateEvent (no initial_term_end / renewals)
+    if doc_type == "AMENDMENT":
+        return events
 
     # 2. Determine base start date
     raw_start = attributes.get("start_date")

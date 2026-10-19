@@ -1,0 +1,90 @@
+{
+  "party_merge": {
+    "description": "The 3 Acme Corp name variants must resolve to one canonical party.",
+    "acme_variants": [
+      "Acme Corp",
+      "ACME Corporation",
+      "Acme Corp., Inc."
+    ],
+    "acme_europe": "Acme Europe Ltd",
+    "rule": "All ACME_VARIANTS map to the same party_id; ACME_EUROPE gets a different party_id."
+  },
+  "query_1_cap_below_standard_and_expiring_2026": {
+    "description": "contracts whose indemnity cap is below the standard (2x) AND whose current term ends in 2026",
+    "expected_doc_ids": [
+      "msa-hooli-acme",
+      "msa-umbrella-acme",
+      "msa-stark-acme"
+    ]
+  },
+  "query_2_governing_law_not_new_york": {
+    "description": "contracts with governing law other than New York",
+    "expected_doc_ids": [
+      "msa-umbrella-acme",
+      "msa-stark-acme",
+      "msa-wayne-acme",
+      "msa-wonka-acme",
+      "msa-hooli-acme-eu",
+      "msa-umbrella-acme-eu",
+      "msa-stark-acme-eu",
+      "sow-wonka-acme-01"
+    ]
+  },
+  "query_3_auto_renew_and_non_renewal_deadline_passed": {
+    "description": "contracts that auto-renew and whose non-renewal deadline has already passed as of 2026-10-19",
+    "expected_doc_ids": [
+      "msa-hooli-acme"
+    ]
+  },
+  "expiring_2026_q4": {
+    "description": "Contracts with initial_term_end between 2026-11-01 and 2026-12-31.",
+    "expected_doc_ids": [
+      "msa-hooli-acme",
+      "msa-umbrella-acme",
+      "msa-stark-acme",
+      "sow-hooli-acme-01"
+    ]
+  },
+  "expired_before_today": {
+    "description": "Contracts whose initial_term_end <= 2026-10-19 (as_of date).",
+    "expected_doc_ids": [
+      "msa-wayne-acme"
+    ]
+  },
+  "expiring_2027": {
+    "description": "Contracts with initial_term_end in 2027.",
+    "expected_doc_ids": [
+      "msa-wonka-acme",
+      "msa-hooli-acme-eu",
+      "msa-umbrella-acme-eu",
+      "sow-wonka-acme-01"
+    ]
+  },
+  "expiring_2028": {
+    "description": "Contracts with initial_term_end in 2028.",
+    "expected_doc_ids": [
+      "msa-stark-acme-eu",
+      "msa-wayne-acme-eu"
+    ]
+  },
+  "cap_variants": {
+    "description": "Each cap_key should appear in at least one contract.",
+    "expected_caps": [
+      "0.5x",
+      "1x",
+      "1.5x",
+      "2x",
+      "3x"
+    ]
+  },
+  "auto_renew_contracts": {
+    "description": "Contracts with auto_renew=True.",
+    "expected_doc_ids": [
+      "msa-hooli-acme",
+      "msa-stark-acme",
+      "msa-wonka-acme",
+      "msa-hooli-acme-eu",
+      "msa-stark-acme-eu"
+    ]
+  }
+}
