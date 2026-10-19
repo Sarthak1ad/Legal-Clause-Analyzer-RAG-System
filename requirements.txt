@@ -4,3 +4,4 @@ pymupdf
 pytest
 rapidfuzz
 pyyaml
+neo4j>=5.0.0

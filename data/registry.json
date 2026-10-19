@@ -26,5 +26,12 @@
       "sha256": "0b2f4c8d2be147b6bc2ded4937458f332c8e00ffab78fac59696f3abbd78c67f",
       "ingested_at": "2026-10-19T05:27:32.658646+00:00"
     }
+  ],
+  "amendment-acme-01": [
+    {
+      "version": 1,
+      "sha256": "676386c2ec69e496024e2ad5d9639354fdfe19df8f1a964b0a4f4a223e4824ec",
+      "ingested_at": "2026-10-19T05:41:51.293517+00:00"
+    }
   ]
 }

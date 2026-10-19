@@ -80,6 +80,12 @@ MSA_INITECH = MSA_ACME.replace("Acme Corp", "Initech LLC").replace(
     "December 1, 2023", "June 1, 2024").replace(
     "one times (1x) the annual Fees", "two times (2x) the annual Fees")
 
+AMENDMENT_ACME = """AMENDMENT NO. 1 TO MASTER SERVICES AGREEMENT
+This Amendment No. 1 is effective as of March 1, 2026 and amends the Master Services Agreement dated December 1, 2023 between Acme Corp and Northwind Software Ltd.
+1. Section 9.2 is deleted and replaced with: "9.2 Cap on Indemnity. Supplier's total liability under this Section 9 shall not exceed two times (2x) the annual Fees paid in the twelve (12) months preceding the claim."
+2. Section 2.1 is deleted and replaced with: "2.1 Term. This Agreement begins on the Effective Date and continues for five (5) years unless terminated earlier in accordance with this Agreement."
+"""
+
 
 def write_docx(name: str, text: str):
     d = Document()
@@ -107,4 +113,5 @@ if __name__ == "__main__":
     write_docx("sow_acme_01.docx", SOW_ACME)
     write_docx("nda_globex.docx", NDA_GLOBEX)
     write_pdf("msa_initech.pdf", MSA_INITECH)
+    write_docx("amendment_acme_01.docx", AMENDMENT_ACME)
     print("samples written to", OUT)
