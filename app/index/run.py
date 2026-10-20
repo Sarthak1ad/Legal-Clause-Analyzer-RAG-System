@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -72,12 +73,7 @@ def cmd_build(args: argparse.Namespace) -> None:
 
 def cmd_search(args: argparse.Namespace) -> None:
     """Search the hybrid index with optional filters and score breakdown."""
-    store = IndexStore(DEFAULT_INDEX_DIR)
-    embedder_name = store.get_meta("embedder_name") or "hashing"
-    embedder_dim = int(store.get_meta("embedder_dim") or "512")
-    embedder = get_embedder("hashing" if "hashing" in embedder_name else "st", dim=embedder_dim)
-
-    searcher = HybridSearcher(store, embedder)
+    backend = getattr(args, "backend", None) or os.environ.get("INDEX_BACKEND", "local")
 
     filters: dict[str, Any] = {}
     if args.clause_type:
@@ -91,6 +87,22 @@ def cmd_search(args: argparse.Namespace) -> None:
 
     user_groups = [g.strip() for g in args.groups.split(",")] if args.groups else ["all"]
 
+    if backend == "supabase":
+        from ..db.conn import get_conn, get_database_url, is_postgres_available
+        if not is_postgres_available():
+            print("[ERROR] Postgres/Supabase is not reachable. Check DATABASE_URL in .env.", file=sys.stderr)
+            sys.exit(1)
+        conn = get_conn(get_database_url())
+        embedder = get_embedder(os.environ.get("EMBED_MODEL", "hashing"))
+        from .pg_search import PgHybridSearcher
+        searcher = PgHybridSearcher(conn, embedder)
+    else:
+        store = IndexStore(DEFAULT_INDEX_DIR)
+        embedder_name = store.get_meta("embedder_name") or "hashing"
+        embedder_dim = int(store.get_meta("embedder_dim") or "512")
+        embedder = get_embedder("hashing" if "hashing" in embedder_name else "st", dim=embedder_dim)
+        searcher = HybridSearcher(store, embedder)
+
     hits = searcher.search(
         query=args.query,
         k=args.k,
@@ -100,7 +112,7 @@ def cmd_search(args: argparse.Namespace) -> None:
         user_groups=user_groups,
     )
 
-    print(f"\nSEARCH RESULTS (mode={args.mode}, k={args.k}, results={len(hits)})")
+    print(f"\nSEARCH RESULTS (backend={backend}, mode={args.mode}, k={args.k}, results={len(hits)})")
     print(f"Query: '{args.query}'\n")
 
     if not hits:
@@ -118,6 +130,82 @@ def cmd_search(args: argparse.Namespace) -> None:
         ref = ref[:25]
         score_str = f"{h.rrf_score:.4f}"
         print(f"  {i:<3} {score_str:<8} {v_rank:<6} {k_rank:<6} {h.kind:<9} {ref:<26} {h.snippet[:65]}")
+
+
+def cmd_eval(args: argparse.Namespace) -> None:
+    """Run retrieval evaluation against local, supabase, or both backends."""
+    from .eval import run_evaluation, DEFAULT_EVAL_FILE
+
+    eval_path = Path(args.eval_file)
+    if not eval_path.exists():
+        print(f"[ERROR] Eval dataset not found: {eval_path}", file=sys.stderr)
+        sys.exit(1)
+
+    queries = json.loads(eval_path.read_text(encoding="utf-8"))
+    backend = args.backend or "local"
+
+    print(f"\n{'='*75}")
+    print(f"  RETRIEVAL EVALUATION ({len(queries)} test queries, k={args.k})")
+    print(f"  Dataset: {eval_path}")
+    print(f"{'='*75}\n")
+
+    local_results = None
+    supabase_results = None
+
+    if backend in ("local", "both"):
+        store = IndexStore(DEFAULT_INDEX_DIR)
+        embedder_name = store.get_meta("embedder_name") or "hashing"
+        embedder_dim = int(store.get_meta("embedder_dim") or "512")
+        embedder = get_embedder("hashing" if "hashing" in embedder_name else "st", dim=embedder_dim)
+        local_searcher = HybridSearcher(store, embedder)
+        local_results = run_evaluation(local_searcher, queries, k=args.k)
+
+    if backend in ("supabase", "both"):
+        from ..db.conn import get_conn, get_database_url, is_postgres_available
+        if not is_postgres_available():
+            if backend == "supabase":
+                print("[ERROR] Postgres/Supabase not reachable. Check DATABASE_URL in .env.", file=sys.stderr)
+                sys.exit(1)
+            else:
+                print("  [NOTE] Supabase is offline or unconfigured; skipping Supabase column.")
+        else:
+            conn = get_conn(get_database_url())
+            embedder = get_embedder(os.environ.get("EMBED_MODEL", "hashing"))
+            from .pg_search import PgHybridSearcher
+            pg_searcher = PgHybridSearcher(conn, embedder)
+            supabase_results = run_evaluation(pg_searcher, queries, k=args.k)
+
+    if backend == "both" and supabase_results is not None:
+        print(f"  {'Mode':<10} | {'Local Recall@5':<15} {'Local MRR':<11} | {'Supabase Recall@5':<18} {'Supabase MRR':<12}")
+        print("  " + "-" * 72)
+        for m in ["keyword", "vector", "hybrid"]:
+            lr = f"{local_results[m]['recall@5']*100:.1f}%" if local_results else "-"
+            lm = f"{local_results[m]['mrr']:.3f}" if local_results else "-"
+            sr = f"{supabase_results[m]['recall@5']*100:.1f}%"
+            sm = f"{supabase_results[m]['mrr']:.3f}"
+            print(f"  {m:<10} | {lr:<15} {lm:<11} | {sr:<18} {sm:<12}")
+
+        print("\nRanking Analysis (ts_rank_cd vs SQLite BM25):")
+        print("  - Keyword: Postgres ts_rank_cd (Cover Density) rewards term proximity")
+        print("    and exact phrases, whereas BM25 rewards term frequency saturation.")
+        print("  - Vector: pgvector and numpy compute identical cosine distance metrics.")
+        print("  - Hybrid: RRF fusion combines ranks identically (k=60), dampening")
+        print("    individual score discrepancies between backends.")
+    elif local_results is not None:
+        print(f"  {'Mode':<12} {'Recall@5':<12} {'MRR':<12}")
+        print("  " + "-" * 36)
+        for m in ["keyword", "vector", "hybrid"]:
+            rec = local_results[m]["recall@5"]
+            mrr = local_results[m]["mrr"]
+            print(f"  {m:<12} {rec*100:>8.1f}%   {mrr:>8.3f}")
+    elif supabase_results is not None:
+        print(f"  {'Mode':<12} {'Recall@5':<12} {'MRR':<12}")
+        print("  " + "-" * 36)
+        for m in ["keyword", "vector", "hybrid"]:
+            rec = supabase_results[m]["recall@5"]
+            mrr = supabase_results[m]["mrr"]
+            print(f"  {m:<12} {rec*100:>8.1f}%   {mrr:>8.3f}")
+    print()
 
 
 def cmd_communities(args: argparse.Namespace) -> None:
@@ -161,12 +249,19 @@ def main() -> None:
     p_search.add_argument("query", help="Search query string")
     p_search.add_argument("--k", type=int, default=5, help="Number of results to return")
     p_search.add_argument("--mode", default="hybrid", choices=["hybrid", "vector", "keyword"], help="Search mode")
+    p_search.add_argument("--backend", default=os.environ.get("INDEX_BACKEND", "local"), choices=["local", "supabase"], help="Index storage backend")
     p_search.add_argument("--clause-type", help="Filter by clause_type")
     p_search.add_argument("--doc-type", help="Filter by doc_type (e.g. MSA, SOW)")
     p_search.add_argument("--contract-id", help="Filter by contract_id")
     p_search.add_argument("--kind", help="Filter by kind (clause, template, summary)")
     p_search.add_argument("--as-of", default="2026-10-19", help="Evaluate effective state as of date")
     p_search.add_argument("--groups", default="all", help="User ACL groups (comma-separated)")
+
+    # eval
+    p_eval = subparsers.add_parser("eval", help="Run retrieval evaluation")
+    p_eval.add_argument("--eval-file", default="tests/data/retrieval_eval.json", help="Path to retrieval eval dataset")
+    p_eval.add_argument("--backend", default="local", choices=["local", "supabase", "both"], help="Backend to evaluate")
+    p_eval.add_argument("--k", type=int, default=5, help="Cutoff rank for recall")
 
     # communities
     subparsers.add_parser("communities", help="List portfolio communities and summary stats")
@@ -177,6 +272,8 @@ def main() -> None:
         cmd_build(args)
     elif args.subcommand == "search":
         cmd_search(args)
+    elif args.subcommand == "eval":
+        cmd_eval(args)
     elif args.subcommand == "communities":
         cmd_communities(args)
 

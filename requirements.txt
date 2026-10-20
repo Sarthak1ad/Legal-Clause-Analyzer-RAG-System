@@ -6,3 +6,9 @@ rapidfuzz
 pyyaml
 numpy
 networkx
+
+# real backends (Layer 5b) – imported lazily; install only when using cloud
+neo4j>=5.0.0
+psycopg[binary]>=3
+pgvector
+python-dotenv

@@ -188,6 +188,8 @@ def _run_json_fallback(query_key: str, data_dir: Path) -> list[dict[str, Any]]:
             if p.get("status") != "active":
                 continue
             cap = p.get("cap_multiple")
+            if cap is None and isinstance(p.get("attributes"), dict):
+                cap = p["attributes"].get("cap_multiple")
             if cap is None:
                 continue
             try:

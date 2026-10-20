@@ -104,6 +104,41 @@ def _run_with_retry(
     raise last_exc  # type: ignore[misc]
 
 
+def _sanitize_for_neo4j(properties: dict[str, Any]) -> dict[str, Any]:
+    """Sanitize properties so they are acceptable to Neo4j.
+
+    Neo4j supports primitives (str, int, float, bool) and arrays thereof.
+    Dicts (such as clause attributes) have their primitive top-level keys
+    flattened onto the node (e.g. cap_multiple, cap_basis), and the dict itself
+    is stored as a JSON string (<key>_json).
+    Lists containing dicts or mixed types are stored as JSON strings.
+    """
+    import json
+    clean: dict[str, Any] = {}
+    for k, v in properties.items():
+        if isinstance(v, dict):
+            for sub_k, sub_v in v.items():
+                if isinstance(sub_v, (str, int, float, bool)):
+                    clean[sub_k] = sub_v
+            try:
+                clean[f"{k}_json"] = json.dumps(v)
+            except Exception:
+                pass
+        elif isinstance(v, list):
+            if all(isinstance(x, (str, int, float, bool)) for x in v):
+                clean[k] = v
+            else:
+                try:
+                    clean[k] = json.dumps(v)
+                except Exception:
+                    clean[k] = [str(x) for x in v]
+        elif isinstance(v, (str, int, float, bool)) or v is None:
+            clean[k] = v
+        else:
+            clean[k] = str(v)
+    return clean
+
+
 # ---------------------------------------------------------------------------
 # Neo4jStore
 # ---------------------------------------------------------------------------
@@ -253,7 +288,7 @@ class Neo4jStore:
         # ---- Nodes -------------------------------------------------------
         nodes_by_label: dict[str, list[dict[str, Any]]] = {}
         for n in graph.nodes:
-            props = dict(n.properties)
+            props = _sanitize_for_neo4j(dict(n.properties))
             props["id"] = _ns_id(n.id)       # namespaced id
             props["ns"] = ns                  # namespace tag
             props["_original_id"] = n.id      # keep original for edge matching
@@ -296,7 +331,7 @@ class Neo4jStore:
                 "provenance": e.provenance,
                 "evidence_span_ids": e.evidence_span_ids,
             }
-            edge_dict.update(e.properties)
+            edge_dict.update(_sanitize_for_neo4j(dict(e.properties)))
             edges_by_type.setdefault(e.type, []).append(edge_dict)
 
         edge_total = sum(len(v) for v in edges_by_type.values())
