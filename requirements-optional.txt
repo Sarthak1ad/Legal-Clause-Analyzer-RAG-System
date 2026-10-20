@@ -2,3 +2,5 @@ sentence-transformers
 python-igraph
 leidenalg
 neo4j>=5.0.0
+psycopg[binary]>=3.0.0
+pgvector>=0.2.0

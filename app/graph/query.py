@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 from typing import Any, Optional
@@ -287,7 +288,17 @@ def run_query(
             cypher_clean = "\n".join(
                 line for line in cypher.splitlines() if not line.strip().startswith("//")
             )
-            rows = store.query(cypher_clean)
+            params: dict[str, Any] = {}
+            if namespace:
+                params["ns"] = namespace
+                if "{ns:" not in cypher_clean and "$ns" not in cypher_clean:
+                    cypher_clean = re.sub(
+                        r"MATCH \(([a-zA-Z0-9_]+):Contract",
+                        r"MATCH (\1:Contract {ns: $ns}",
+                        cypher_clean,
+                        count=1,
+                    )
+            rows = store.query(cypher_clean, parameters=params)
     else:
         print("(Mode: OFFLINE – evaluated against JSON graph)")
         rows = _run_json_fallback(query_key, data_dir)

@@ -109,21 +109,12 @@ class TestEnvMissing(unittest.TestCase):
 
     def test_get_database_url_raises_without_env(self):
         """get_database_url() raises RuntimeError with helpful message when DATABASE_URL is not set."""
-        backup = os.environ.pop("DATABASE_URL", None)
-        try:
-            # Fresh import to avoid cached module state
-            mods_to_remove = [k for k in sys.modules if "app.db.conn" in k]
-            for m in mods_to_remove:
-                del sys.modules[m]
-
+        with unittest.mock.patch.dict(os.environ, {"DATABASE_URL": ""}):
             from app.db.conn import get_database_url
             with self.assertRaises(RuntimeError) as ctx:
                 get_database_url()
             self.assertIn("DATABASE_URL", str(ctx.exception))
             self.assertIn("pooler", str(ctx.exception))  # hint about pooler
-        finally:
-            if backup is not None:
-                os.environ["DATABASE_URL"] = backup
 
 
 # ---------------------------------------------------------------------------
